@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exam.board.dao.MemberDao">
+
+<select id="memberList" resultType="com.exam.board.dto.MemberDto">
+	select * from member 
+</select>
+
+<insert id="applyInsert" parameterType="java.util.HashMap">
+	
+	insert into member (uid, upw, uname, uemail, gender, ubirthday,
+uzipcode, uaddr, uhobby, ujob) values (#{item1},#{item2},#{item3},#{item4},#{item5},#{item6},#{item7},#{item8},#{item9},#{item10})
+</insert>
+	
+<select id="idCheck" resultType="int">
+	select COUNT(*) from member where uid = ${param1};
+</select>
+
+<!-- 로그인처리 -->
+<select id="loginProc" resultType="int">
+	select count(*) from member where uid = #{param1} and upw = #{param2}
+</select>
+<!-- 게시글에 유저정보넣기 userInfo -->
+<select id="userInfo" resultType="com.exam.board.dto.MemberDto">
+	select * from member where uid = #{param1}
+</select>
+
+
+
+</mapper>
